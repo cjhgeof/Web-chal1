@@ -35,6 +35,7 @@
 
       const username = document.getElementById("username").value;
       const password = document.getElementById("password").value;
+      const correctHash = "2196812e91c29df34f5e217cfd639881";
 
       if (!filter(username) || !filter(password)) {
         document.getElementById("msg").textContent = "Illegal characters detected.";
@@ -43,6 +44,7 @@
 
       if (checkPassword(username, password)) {
         document.getElementById("msg").textContent = "Log In Successful";
+        document.getElementById("hashInput").value = correctHash;
         document.getElementById("hashForm").submit();
       } else {
         document.getElementById("msg").textContent = "Log In Failed";
