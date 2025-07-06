@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>UNHACKABLE_LOGIN</title>
+  <script src="secure.js"></script> 
+</head>
+<body>
+
+  <h1>UNHACKABLE_LOGIN</h1>
+
+  <p>Only letters and numbers allowed for username and password.</p>
+
+ 
+  <form id="loginForm">
+    <input type="text" id="username" placeholder="Username" required autofocus><br>
+    <input type="password" id="password" placeholder="Password" required>
+    <button type="submit">Login</button>
+  </form>
+
+ 
+  <form id="hashForm" action="login.php" method="POST" hidden>
+    <input type="text" name="hash" id="hashInput" />
+  </form>
+
+  <p id="msg"></p>
+
+  <script>
+    function filter(str) {
+      return /^[a-zA-Z0-9]+$/.test(str); 
+    }
+
+    document.getElementById("loginForm").addEventListener("submit", function(e) {
+      e.preventDefault(); 
+
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+
+      if (!filter(username) || !filter(password)) {
+        document.getElementById("msg").textContent = "Illegal characters detected.";
+        return;
+      }
+
+      if (checkPassword(username, password)) {
+        document.getElementById("msg").textContent = "Log In Successful";
+        document.getElementById("hashForm").submit();
+      } else {
+        document.getElementById("msg").textContent = "Log In Failed";
+      }
+    });
+  </script>
+</body>
+</html>
